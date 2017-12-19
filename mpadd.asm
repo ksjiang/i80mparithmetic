@@ -1,4 +1,8 @@
-mpadd:	LXI B, X
+mpadd:	PUSH PSW	;save registers
+	PUSH B
+	PUSH D
+	PUSH H
+	LXI B, X
 	LXI H, Z
 	MVI D, SL
 mpadd1:	LDAX B		;copy addend to result block
@@ -22,7 +26,11 @@ mpadd3:	LDAX B		;main addition loop
 mpadd4:	JNC mpadd5
 	INX H
 	INR M
-mpadd5:	HLT
+mpadd5:	POP H		;restore registers
+	POP D
+	POP B
+	POP PSW
+	RET		;return to calling procedure
 
 SL	EQU	03H
 X	EQU	0FE00H
