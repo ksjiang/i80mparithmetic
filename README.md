@@ -6,24 +6,19 @@ The Intel 8080 and 8085 are 8-bit microprocessors with instruction sets that ope
 
 ### MPADD (\*res, \*add1, \*add2, n)
 
-**Category** Arithmetic
+**Category:** Arithmetic
 
-**Description** Adds two numbers of size n each stored in addresses add1 and add2. Writes result to address res. Returns nothing.
+**Description:** Adds two numbers of size n each stored in addresses add1 and add2. Writes result to address res. Returns nothing.
 
-**Registers Destroyed** ALL
+**Registers Destroyed:** ALL, but procedure saves and restores
 
-**RAM Used** Stack. Will write to \*res as appropriate.
+**RAM Used:** Stack. Will write to \*res as appropriate.
 
-**Remarks** n should be one byte long. This is to say the maximum size of the inputs is 255. Little-endian, always.
+**Remarks:** n should be one byte long. This is to say the maximum size of the inputs is 255. Little-endian, as always.
 
-**Example** Adds 4-byte ints at locations 1000H and 2000H, stores result at 3000H
+**Example:** Adds 4-byte ints at locations 1000H and 2000H, stores result at 3000H
 
 ```
-PUSH PSW     ;preserve regs
-PUSH B
-PUSH D
-PUSH H
-
 MVI A, 04H  ; size is 4 bytes
 PUSH PSW
 LXI B, 1000H
@@ -33,9 +28,4 @@ PUSH B
 LXI B, 3000H
 PUSH B
 CALL mpadd
-
-POP H       ;restore regs
-POP D
-POP B
-POP PSW
 ```
