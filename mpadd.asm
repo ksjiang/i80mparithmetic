@@ -49,7 +49,7 @@ mpadd5:	PUSH PSW	;save carry info
 	JC mpadd6
 	POP PSW
 	STC
-	CCF
+	CMC
 	RET		;return to calling procedure
 
 mpadd6:	POP PSW
