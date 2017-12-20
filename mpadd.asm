@@ -1,8 +1,9 @@
-mpadd:	PUSH B		;save registers
+mpadd:	PUSH PSW	;save registers
+	PUSH B
 	PUSH D
 	PUSH H
 
-mpadd1:	LXI H, 0008H	;do SP + 8
+mpadd1:	LXI H, 000AH	;do SP + 10
 	DAD SP
 	SPHL
 	POP H		;*res
@@ -35,10 +36,20 @@ mpadd4:	LDAX D		;main addition loop
 	INX H
 	JMP mpadd4
 
-mpadd5:	LXI H, 0FFF4H	;do SP - 12
+mpadd5:	PUSH PSW	;save carry info
+	POP B
+	LXI H, 0FFF2H	;do SP - 14
 	DAD SP
 	SPHL
+	PUSH B		;restore carry info
+	POP PSW
 	POP H		;restore registers
 	POP D
 	POP B
+	JC mpadd6
+	POP PSW
 	RET		;return to calling procedure
+
+mpadd6:	POP PSW
+	STC
+	RET
