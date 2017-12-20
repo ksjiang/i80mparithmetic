@@ -48,6 +48,8 @@ mpadd5:	PUSH PSW	;save carry info
 	POP B
 	JC mpadd6
 	POP PSW
+	STC
+	CCF
 	RET		;return to calling procedure
 
 mpadd6:	POP PSW
