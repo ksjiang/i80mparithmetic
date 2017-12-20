@@ -3,7 +3,7 @@ mpadd:	PUSH PSW	;save registers
 	PUSH D
 	PUSH H
 
-mpadd1:	LXI H, 0FFF6H	;do SP - 10
+mpadd1:	LXI H, 000AH	;do SP + 10
 	DAD SP
 	SPHL
 	POP H		;*res
@@ -20,7 +20,7 @@ mpadd2:	LDAX D		;copy addend to result block
 	DCR B
 	JNZ mpadd2
 
-mpadd3:	LXI H, 0008H	;do SP + 8
+mpadd3:	LXI H, 0FFF8H	;do SP - 8
 	DAD SP
 	SPHL
 	POP H		;*res
@@ -36,7 +36,7 @@ mpadd4:	LDAX D		;main addition loop
 	INX H
 	JMP mpadd4
 
-mpadd5:	LXI H, 0010H	;do SP + 16
+mpadd5:	LXI H, 0FFF0H	;do SP - 16
 	DAD SP
 	SPHL
 	POP H		;restore registers
