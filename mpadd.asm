@@ -36,7 +36,10 @@ mpadd4:	LDAX D		;main addition loop
 	INX H
 	JMP mpadd4
 
-mpadd5:	POP H		;restore registers
+mpadd5:	LXI H, 0010H	;do SP + 16
+	DAD SP
+	SPHL
+	POP H		;restore registers
 	POP D
 	POP B
 	POP PSW
