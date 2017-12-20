@@ -1,5 +1,4 @@
-mpadd:	PUSH PSW	;save registers
-	PUSH B
+mpadd:	PUSH B		;save registers
 	PUSH D
 	PUSH H
 
@@ -42,5 +41,4 @@ mpadd5:	LXI H, 0FFF4H	;do SP - 12
 	POP H		;restore registers
 	POP D
 	POP B
-	POP PSW
 	RET		;return to calling procedure
