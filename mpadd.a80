@@ -5,11 +5,22 @@ mpadd:	PUSH PSW	;save registers
 
 mpadd1:	LXI H, 0FFF1H	;do HL = SP - 15
 	DAD SP
-	MOV C, M	;counter
+	MOV A, M	;counter
+	
 	INX H
 	MOV E, M	;add2 lo byte
 	INX H
 	MOV D, M	;add2 hi byte
+	
+	INX H
+	INX H
+	MOV C, M	;res lo byte
+	INX H
+	MOV B, M	;res hi byte
+	
+	MOV L, C
+	MOV H, B
+	MOV C, A
 
 mpadd2:	LDAX D		;copy addend to result block
 	MOV M, A
