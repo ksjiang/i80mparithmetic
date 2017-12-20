@@ -7,8 +7,8 @@ mpadd1:	LXI H, 000AH	;do SP + 10
 	DAD SP
 	SPHL
 	POP H		;*res
-	DCX SP
-	DCX SP
+	INX SP
+	INX SP
 	POP D		;*add2
 	POP B		;counter
 	MOV C, B	;dup counter
